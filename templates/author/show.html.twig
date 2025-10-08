@@ -1,0 +1,26 @@
+{#les filtres#}
+{{nom|upper}}
+{{'&Hello'|lower|trim('&')}}
+{# declaration variable #}
+{% set a="hello"%}
+{{a}}
+{# Boucle for #}
+{% for i in 0..9 %}
+{ {i} }
+{% endfor %}
+{# structure  conditionell #}
+
+
+{% if 'Fabien' starts with 'F' %} 
+
+ commence par F
+
+    {% endif %} 
+
+{% if 'Fabien' ends with 'n' %} 
+
+      Finis par n 
+
+{% endif %}
+<a href="{{path('app_author')}}">Link 1 </a>
+<a href="{{url('app_author')}}">Link 2 </a>
