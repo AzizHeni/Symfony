@@ -1,24 +1,41 @@
-<h2>Liste des auteurs</h2>
+{% extends 'base.html.twig' %}
 
-{% if authors is defined and authors|length > 0 %}
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>Photo</th>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Livres</th>
-            <th>Détails</th>
-        </tr>
-        {% for author in authors %}
+{% block title %}List authors{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center;">List authors</h1>
+
+    <table border="1" style="margin: auto; border-collapse: collapse; width: 60%;">
+        <thead>
             <tr>
-                <td><img src="{{ author.picture }}" alt="{{ author.username }}" width="80"></td>
-                <td>{{ author.username }}</td>
-                <td>{{ author.email }}</td>
-                <td>{{ author.nb_books }}</td>
-                <td><a href="{{ path('author_show', {id: author.id}) }}">Détails</a></td>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for author in authors %}
+                <tr>
+                    <td>{{ author.username }}</td>
+                    <td>{{ author.email }}</td>
+                    <td>
+                        <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+                        |
+                        <a href="{{ path('author_delete', {'id': author.id}) }}"
+                           onclick="return confirm('Are you sure you want to delete this author?');">
+                           delete
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center;">No authors found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
-{% else %}
-    Aucun auteur disponible.
-{% endif %}
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ path('author_new') }}">Add new author</a>
+    </div>
+{% endblock %}
